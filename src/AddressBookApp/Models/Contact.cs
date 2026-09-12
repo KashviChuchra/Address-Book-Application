@@ -31,5 +31,8 @@ namespace AddressBookApp.src.AddressBookApp.Models
         {
             return $"{FirstName} {LastName} | {Address},{City},{State} {Zip} | {PhoneNumber}| {Email}"; 
         }
+
+        
+
     }
 }
