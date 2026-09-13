@@ -18,9 +18,16 @@ namespace AddressBookApp.src.AddressBookApp.Services
                 return contacts;
             }
         }
-        public void AddContact(Contact c)
+        public bool AddContact(Contact contact)
         {
-            contacts.Add(c);
+            bool exists = contacts.Any(c => c.FirstName == contact.FirstName && c.LastName == contact.LastName);
+            if (exists)
+            {
+                Console.WriteLine($"Contact '{contact.FirstName} {contact.LastName}' already exists. Duplicate not added.");
+                return false;
+            }
+            contacts.Add(contact);
+            return true;
        
         }
         public void PrintAll()

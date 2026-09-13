@@ -77,8 +77,8 @@ class Program
                     Contact contact2 = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
                     validator.Validate(contact2);
-                    addressBook1.AddContact(contact2);
-                    Console.WriteLine("Contact Added Successfully!");
+                    bool added=addressBook1.AddContact(contact2);
+                    if(added)   Console.WriteLine("Contact Added Successfully!");
                 }
                 catch (InvalidContactException e)
                 {
