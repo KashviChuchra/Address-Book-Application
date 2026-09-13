@@ -98,5 +98,17 @@ namespace AddressBookApp.src.AddressBookApp.Services
             }
         }
 
+        public void DeleteContact(string firstName, string lastName)
+        {
+            Contact contact = contacts.FirstOrDefault(c => c.FirstName == firstName && c.LastName == lastName);
+            if (contact == null)
+            {
+                Console.WriteLine("Contact Not Found");
+                return;
+            }
+            contacts.Remove(contact);
+            Console.WriteLine("Contact Deleted");
+        }
+
     }
 }

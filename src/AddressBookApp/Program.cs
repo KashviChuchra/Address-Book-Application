@@ -4,13 +4,14 @@ using AddressBookApp.src.AddressBookApp.Services;
 using AddressBookApp.src.AddressBookApp.Validation;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 namespace AddressBookApp;
 
 class Program
 {
     public static void Main(string[] args)
     {
-        Contact contact1 = new Contact("Kashvi", "Chuchra", "#796/11, Gobind Colony, Dhand Road","Kaithal", "Haryana","136027", "09996265606","chuchrakashvi@gmail.com");
+        Contact contact1 = new Contact("Kashvi", "Chuchra", "#796/11, Gobind Colony, Dhand Road","Kaithal", "Haryana","136027", "9996265606","chuchrakashvi@gmail.com");
         Console.WriteLine(contact1.ToString());
         ContactValidator validator = new ContactValidator();
         try
@@ -22,14 +23,17 @@ class Program
             Console.WriteLine("Error: " + e.Message);
         }
 
-        // ---------------UC3 + UC4-----------------------------------
+        // ---------------UC3 + UC4  +UC5-----------------------------------
         AddressBook addressBook1 = new AddressBook();
+        addressBook1.AddContact(contact1);
+
         while (true)
         {
             Console.WriteLine();
             Console.WriteLine("1- Add Contact");
             Console.WriteLine("2- Show All Contacts");
             Console.WriteLine("3- Edit Contacts");
+            Console.WriteLine("4- Delete Contacts");
             Console.WriteLine("0- Exit");
             string choice = Console.ReadLine();
 
@@ -84,6 +88,14 @@ class Program
                 Console.WriteLine("Enter last name to edit: ");
                 string lastName1 = Console.ReadLine();
                 addressBook1.EditContact(firstName1, lastName1,validator);
+            }
+            else if (choice == "4")
+            {
+                Console.WriteLine("Enter first name to delete: ");
+                string firstName1 = Console.ReadLine();
+                Console.WriteLine("Enter last name to delete: ");
+                string lastName1 = Console.ReadLine();
+                addressBook1.DeleteContact(firstName1, lastName1);
             }
             else if (choice == "0")
             {
