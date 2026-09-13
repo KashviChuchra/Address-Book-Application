@@ -22,12 +22,14 @@ class Program
             Console.WriteLine("Error: " + e.Message);
         }
 
-        // ---------------UC3-----------------------------------
+        // ---------------UC3 + UC4-----------------------------------
         AddressBook addressBook1 = new AddressBook();
         while (true)
         {
+            Console.WriteLine();
             Console.WriteLine("1- Add Contact");
             Console.WriteLine("2- Show All Contacts");
+            Console.WriteLine("3- Edit Contacts");
             Console.WriteLine("0- Exit");
             string choice = Console.ReadLine();
 
@@ -75,6 +77,14 @@ class Program
             {
                 addressBook1.PrintAll();
             }
+            else if (choice == "3")
+            {
+                Console.WriteLine("Enter first name to edit: ");
+                string firstName1 = Console.ReadLine();
+                Console.WriteLine("Enter last name to edit: ");
+                string lastName1 = Console.ReadLine();
+                addressBook1.EditContact(firstName1, lastName1,validator);
+            }
             else if (choice == "0")
             {
                 break;
@@ -83,6 +93,9 @@ class Program
             {
                 Console.WriteLine("Invalid Choice!");
             }
-        }     
+        }
+
+    
+
     }
 }
