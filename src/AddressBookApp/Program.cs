@@ -23,9 +23,17 @@ class Program
             Console.WriteLine("Error: " + e.Message);
         }
 
-        // ---------------UC3 + UC4  +UC5-----------------------------------
+        // ---------------UC3 + UC4  +UC5 +UC6-----------------------------------
         AddressBook addressBook1 = new AddressBook();
         addressBook1.AddContact(contact1);
+        AddressBook addressBook2 = new AddressBook();
+        addressBook2.AddContact(contact1);
+        addressBook2.AddContact(contact1);
+
+        AddressBookMain addressBookMain = new AddressBookMain();
+        addressBookMain.AddAddressBook(addressBook1);
+        addressBookMain.AddAddressBook(addressBook2);
+
 
         while (true)
         {
@@ -34,6 +42,7 @@ class Program
             Console.WriteLine("2- Show All Contacts");
             Console.WriteLine("3- Edit Contacts");
             Console.WriteLine("4- Delete Contacts");
+            Console.WriteLine("5- Count All Contacts");
             Console.WriteLine("0- Exit");
             string choice = Console.ReadLine();
 
@@ -96,6 +105,10 @@ class Program
                 Console.WriteLine("Enter last name to delete: ");
                 string lastName1 = Console.ReadLine();
                 addressBook1.DeleteContact(firstName1, lastName1);
+            }
+            else if (choice == "5")
+            {
+                Console.WriteLine($"Total contacts in all address books: {addressBookMain.CountAllContacts()}");
             }
             else if (choice == "0")
             {
