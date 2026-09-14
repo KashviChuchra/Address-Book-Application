@@ -117,7 +117,49 @@ namespace AddressBookApp.src.AddressBookApp.Services
             Console.WriteLine("Contact Deleted");
         }
 
-        
+        public void GroupByCity()
+        {
+            var matches = contacts.GroupBy(c => c.City).ToList();
+            if (matches.Count == 0)
+            {
+                Console.WriteLine("No person found.");
+                return;
+            }
+
+            Console.WriteLine($"--- By City ---");
+            foreach (var group in matches)
+            {
+                Console.WriteLine($"{group.Key}:");
+                
+                foreach(Contact contact in group)
+                {
+                    Console.WriteLine(" "+contact.FirstName + " " + contact.LastName);
+
+                }
+            }
+            
+        }
+        public void GroupByState()
+        {
+            var matches = contacts.GroupBy(c => c.State).ToList();
+            if (matches.Count == 0)
+            {
+                Console.WriteLine("No person found.");
+                return;
+            }
+
+            Console.WriteLine($"--- By State ---");
+            foreach (var group in matches)
+            {
+                Console.WriteLine($"{group.Key}:");
+
+                foreach (Contact contact in group)
+                {
+                    Console.Write(" "+contact.FirstName + " " + contact.LastName+",");
+                }
+            }
+
+        }
 
     }
 }
