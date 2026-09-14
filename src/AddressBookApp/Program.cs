@@ -43,15 +43,17 @@ class Program
         while (true)
         {
             Console.WriteLine();
-            Console.WriteLine("1- Add Contact");
+            Console.WriteLine("\n1- Add Contact");
             Console.WriteLine("2- Show All Contacts");
             Console.WriteLine("3- Edit Contacts");
             Console.WriteLine("4- Delete Contacts");
             Console.WriteLine("5- Count All Contacts");
             Console.WriteLine("6- Search Person");
             Console.WriteLine("7- View Contact");
+            Console.WriteLine("8- Show Contacts Count: Per city & Per state");
 
             Console.WriteLine("0- Exit");
+            Console.WriteLine();
             string choice = Console.ReadLine();
 
             if (choice == "1")
@@ -163,14 +165,11 @@ class Program
                     string choose = Console.ReadLine();
                     if (choose == "a")
                     {
-                        Console.WriteLine("Enter city: ");
                         addressBook1.GroupByCity();
                     }
                     else if (choose == "b")
                     {
-                        Console.WriteLine("Enter state: ");
                         addressBook1.GroupByState();
-
                     }
                     else if (choose == "exit")
                     {
@@ -182,6 +181,10 @@ class Program
                         break;
                     }
                 }
+            }
+            else if (choice == "8")
+            {
+                addressBook1.CountContactsPerCityState();
             }
             else if (choice == "0")
             {

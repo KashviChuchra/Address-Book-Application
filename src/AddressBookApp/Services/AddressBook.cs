@@ -155,8 +155,39 @@ namespace AddressBookApp.src.AddressBookApp.Services
 
                 foreach (Contact contact in group)
                 {
-                    Console.Write(" "+contact.FirstName + " " + contact.LastName+",");
+                    Console.WriteLine(" "+contact.FirstName + " " + contact.LastName);
                 }
+            }
+
+        }
+
+        public void CountContactsPerCityState()
+        {
+            var cityMatches = contacts.GroupBy(c => c.City).Select(g => (City:g.Key, Count:g.Count())).ToList();
+            var stateMatches = contacts.GroupBy(c => c.State).Select(g => (State: g.Key, Count: g.Count())).ToList();
+
+            if (cityMatches.Count == 0)
+            {
+                Console.WriteLine("No contact Found in city match!");
+                return;
+            }
+            Console.WriteLine("Per City: ");
+            foreach(var i in cityMatches)
+            {
+                Console.WriteLine($"{i.City}={i.Count }");
+            }
+
+            Console.WriteLine();
+            if (stateMatches.Count == 0)
+            {
+                Console.WriteLine("No contact Found in state match!");
+                return;
+            }
+            Console.WriteLine("Per state: ");
+            foreach (var i in stateMatches)
+            {
+                Console.WriteLine($"{i.State}={i.Count}");
+
             }
 
         }
