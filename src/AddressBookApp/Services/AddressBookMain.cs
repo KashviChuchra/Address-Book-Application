@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AddressBookApp.src.AddressBookApp.Services
 {
-    internal class AddressBookMain
+    public class AddressBookMain
     {
         private List<AddressBook> books = new();
 
@@ -13,7 +13,7 @@ namespace AddressBookApp.src.AddressBookApp.Services
         {
             books.Add(book);
         }
-        public int CountAllContacts()
+        public int GetTotalContactCount()
         {
             return books.Sum(b => b.Contacts.Count);
 

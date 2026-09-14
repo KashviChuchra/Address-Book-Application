@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AddressBookApp.src.AddressBookApp.Models
 {
-    internal class Contact
+    public class Contact
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -29,7 +29,7 @@ namespace AddressBookApp.src.AddressBookApp.Models
         }
         public override string ToString()
         {
-            return $"{FirstName} {LastName} | {Address},{City},{State} {Zip} | {PhoneNumber}| {Email}"; 
+            return $"{FirstName} {LastName} | {Address}, {City}, {State} {Zip} | {PhoneNumber} | {Email}"; 
         }
 
         

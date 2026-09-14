@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AddressBookApp.src.AddressBookApp.Services
 {
-    internal class AddressBook
+    public class AddressBook
     {
         private List<Contact> contacts = new();
         public IReadOnlyList<Contact> Contacts
@@ -20,7 +20,7 @@ namespace AddressBookApp.src.AddressBookApp.Services
         }
         public bool AddContact(Contact contact)
         {
-            bool exists = contacts.Any(c => c.FirstName == contact.FirstName && c.LastName == contact.LastName);
+            bool exists = contacts.Any(c =>c.FirstName.Equals(contact.FirstName, StringComparison.OrdinalIgnoreCase) && c.LastName.Equals(contact.LastName, StringComparison.OrdinalIgnoreCase));
             if (exists)
             {
                 Console.WriteLine($"Contact '{contact.FirstName} {contact.LastName}' already exists. Duplicate not added.");
@@ -40,7 +40,7 @@ namespace AddressBookApp.src.AddressBookApp.Services
 
         public void EditContact(string firstName, string lastName, ContactValidator validator)
         {
-            Contact contact = contacts.FirstOrDefault(c => c.FirstName== firstName && c.LastName==lastName);
+            var contact = contacts.FirstOrDefault(c =>c.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&c.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
 
             if (contact==null)
             {
@@ -87,6 +87,13 @@ namespace AddressBookApp.src.AddressBookApp.Services
             try
             {
                 validator.Validate(newUpdatedContact);
+                bool duplicate = contacts.Any(c =>c != contact && c.FirstName.Equals(newUpdatedContact.FirstName, StringComparison.OrdinalIgnoreCase) &&c.LastName.Equals(newUpdatedContact.LastName, StringComparison.OrdinalIgnoreCase));
+
+                if (duplicate)
+                {
+                    Console.WriteLine("Contact Name Already exists");
+                    return;
+                }
                 contact.FirstName = newUpdatedContact.FirstName;
                 contact.LastName = newUpdatedContact.LastName;
                 contact.Address = newUpdatedContact.Address;
@@ -107,7 +114,7 @@ namespace AddressBookApp.src.AddressBookApp.Services
 
         public void DeleteContact(string firstName, string lastName)
         {
-            Contact contact = contacts.FirstOrDefault(c => c.FirstName == firstName && c.LastName == lastName);
+            var contact = contacts.FirstOrDefault(c =>c.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&c.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
             if (contact == null)
             {
                 Console.WriteLine("Contact Not Found");
@@ -117,17 +124,17 @@ namespace AddressBookApp.src.AddressBookApp.Services
             Console.WriteLine("Contact Deleted");
         }
 
-        public void GroupByCity()
+        public void ViewByCityOrState()
         {
-            var matches = contacts.GroupBy(c => c.City).ToList();
-            if (matches.Count == 0)
+            var matches1 = contacts.GroupBy(c => c.City,StringComparer.OrdinalIgnoreCase).ToList();
+            if (matches1.Count == 0)
             {
                 Console.WriteLine("No person found.");
                 return;
             }
 
             Console.WriteLine($"--- By City ---");
-            foreach (var group in matches)
+            foreach (var group in matches1)
             {
                 Console.WriteLine($"{group.Key}:");
                 
@@ -137,11 +144,8 @@ namespace AddressBookApp.src.AddressBookApp.Services
 
                 }
             }
-            
-        }
-        public void GroupByState()
-        {
-            var matches = contacts.GroupBy(c => c.State).ToList();
+
+            var matches = contacts.GroupBy(c => c.State,StringComparer.OrdinalIgnoreCase).ToList();
             if (matches.Count == 0)
             {
                 Console.WriteLine("No person found.");
@@ -155,34 +159,31 @@ namespace AddressBookApp.src.AddressBookApp.Services
 
                 foreach (Contact contact in group)
                 {
-                    Console.WriteLine(" "+contact.FirstName + " " + contact.LastName);
+                    Console.WriteLine(" " + contact.FirstName + " " + contact.LastName);
                 }
             }
 
         }
 
-        public void CountContactsPerCityState()
+        public void GetCountByCityOrState()
         {
-            var cityMatches = contacts.GroupBy(c => c.City).Select(g => (City:g.Key, Count:g.Count())).ToList();
-            var stateMatches = contacts.GroupBy(c => c.State).Select(g => (State: g.Key, Count: g.Count())).ToList();
+            
+            var cityMatches = contacts.GroupBy(c => c.City,StringComparer.OrdinalIgnoreCase).Select(g => (City:g.Key, Count:g.Count())).ToList();
+            var stateMatches = contacts.GroupBy(c => c.State, StringComparer.OrdinalIgnoreCase).Select(g => (State: g.Key, Count: g.Count())).ToList();
 
-            if (cityMatches.Count == 0)
+            if (cityMatches.Count == 0 && stateMatches.Count == 0)
             {
-                Console.WriteLine("No contact Found in city match!");
+                Console.WriteLine("No contacts found.");
                 return;
             }
             Console.WriteLine("Per City: ");
-            foreach(var i in cityMatches)
+            foreach (var i in cityMatches)
             {
-                Console.WriteLine($"{i.City}={i.Count }");
+                Console.WriteLine($"{i.City}={i.Count}");
             }
 
             Console.WriteLine();
-            if (stateMatches.Count == 0)
-            {
-                Console.WriteLine("No contact Found in state match!");
-                return;
-            }
+
             Console.WriteLine("Per state: ");
             foreach (var i in stateMatches)
             {

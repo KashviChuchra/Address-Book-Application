@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace AddressBookApp.src.AddressBookApp.Validation
 {
-    internal class ContactValidator
+    public class ContactValidator
     {
         public bool IsValidName(string name)
         {
@@ -50,7 +50,7 @@ namespace AddressBookApp.src.AddressBookApp.Validation
             if (!IsValidAddressPart(c.City)) throw new InvalidContactException("City must contain minimum 4 characters");
             if (!IsValidAddressPart(c.State)) throw new InvalidContactException("State must contain minimum 4 characters");
             if (!IsValidZip(c.Zip)) throw new InvalidContactException("Zip must contains  6 digits");
-            if (!IsValidPhone(c.PhoneNumber)) throw new InvalidContactException("Phone Number must contains 10 digits and leading countrycode");
+            if (!IsValidPhone(c.PhoneNumber)) throw new InvalidContactException("Phone Number must contains 10 digits.");
             if (!IsValidEmail(c.Email)) throw new InvalidContactException("Email is not valid");
         }
     }

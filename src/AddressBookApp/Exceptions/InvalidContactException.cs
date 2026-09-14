@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AddressBookApp.src.AddressBookApp.Exceptions
 {
-    internal class InvalidContactException:Exception
+    public class InvalidContactException:Exception
     {
         public InvalidContactException(string message): base(message) { }
     }
