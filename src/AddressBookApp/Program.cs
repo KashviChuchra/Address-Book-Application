@@ -43,6 +43,8 @@ class Program
             Console.WriteLine("3- Edit Contacts");
             Console.WriteLine("4- Delete Contacts");
             Console.WriteLine("5- Count All Contacts");
+            Console.WriteLine("6- Search Person");
+
             Console.WriteLine("0- Exit");
             string choice = Console.ReadLine();
 
@@ -109,6 +111,39 @@ class Program
             else if (choice == "5")
             {
                 Console.WriteLine($"Total contacts in all address books: {addressBookMain.CountAllContacts()}");
+            }
+            else if (choice == "6")
+            {
+                while (true)
+                {
+                    Console.WriteLine("\nSearch Person by: ");
+                    Console.WriteLine("a - City");
+                    Console.WriteLine("b - State");
+                    Console.WriteLine("exit - Exiting");
+
+                    string choose = Console.ReadLine();
+                    if (choose == "a")
+                    {
+                        Console.WriteLine("Enter city to search: ");
+                        string city = Console.ReadLine();
+                        addressBookMain.SearchByCity(city);
+                    }
+                    else if (choose == "b")
+                    {
+                        Console.WriteLine("Enter state to search: ");
+                        string state = Console.ReadLine();
+                        addressBookMain.SearchByState(state);
+                    }
+                    else if (choose == "exit")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Operation! Exiting!");
+                        break;
+                    }
+                }
             }
             else if (choice == "0")
             {
