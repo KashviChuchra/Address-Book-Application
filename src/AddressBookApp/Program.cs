@@ -168,7 +168,7 @@
                 }
                 else if (choice == "9")
                 {
-                    addressBook1.SortByName();
+                    addressBookMain.SortByName();
                 }
                 else if (choice == "0")
                 {
