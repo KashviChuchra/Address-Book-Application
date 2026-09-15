@@ -47,6 +47,8 @@ namespace AddressBookApp.src.AddressBookApp.Services
                 Console.WriteLine(contact);
             }
         }
+
+
         public void SortByName()
         {
             var sortedContacts = books.SelectMany(b => b.Contacts).OrderBy(c => c.FirstName).ThenBy(c => c.LastName);

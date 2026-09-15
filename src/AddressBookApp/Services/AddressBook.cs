@@ -2,8 +2,6 @@
 using AddressBookApp.src.AddressBookApp.Models;
 using AddressBookApp.src.AddressBookApp.Validation;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace AddressBookApp.src.AddressBookApp.Services
