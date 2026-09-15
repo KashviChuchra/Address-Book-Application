@@ -54,8 +54,9 @@
                 Console.WriteLine("7- View Contact By City/State");
                 Console.WriteLine("8- Get Count By City Or State");
                 Console.WriteLine("9- Sort By Name");
+                Console.WriteLine("10- Sort By City/State/Zip");
+                Console.WriteLine("0- Exit");
 
-            Console.WriteLine("0- Exit");
                 Console.WriteLine();
                 string choice = Console.ReadLine();
 
@@ -170,7 +171,33 @@
                 {
                     addressBookMain.SortByName();
                 }
-                else if (choice == "0")
+                else if (choice == "10")
+                {
+                    Console.WriteLine("Sort contacts by:");
+                    Console.WriteLine("1- City");
+                    Console.WriteLine("2- State");
+                    Console.WriteLine("3- Zip");
+
+                    string sortChoice = Console.ReadLine();
+
+                    if (sortChoice == "1")
+                    {
+                        addressBookMain.SortByCity();
+                    }
+                    else if (sortChoice == "2")
+                    {
+                        addressBookMain.SortByState();
+                    }
+                    else if (sortChoice == "3")
+                    {
+                        addressBookMain.SortByZip();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice");
+                    }
+                }
+            else if (choice == "0")
                 {
                     break;
                 }

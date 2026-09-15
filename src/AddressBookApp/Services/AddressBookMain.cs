@@ -57,6 +57,35 @@ namespace AddressBookApp.src.AddressBookApp.Services
             }
         }
 
+        public void SortByCity()
+        {
+            var sortedCity = books.SelectMany(b => b.Contacts).OrderBy(c => c.City);
 
+            foreach (var contact in sortedCity)
+            {
+                Console.WriteLine(contact);
+            }
+
+        }
+        public void SortByState()
+        {
+            var sortedState = books.SelectMany(b => b.Contacts).OrderBy(c => c.State);
+
+            foreach (var contact in sortedState)
+            {
+                Console.WriteLine(contact);
+            }
+
+        }
+        public void SortByZip()
+        {
+            var sortedZip = books.SelectMany(b => b.Contacts).OrderBy(c => c.Zip);
+
+            foreach (var contact in sortedZip)
+            {
+                Console.WriteLine(contact);
+            }
+
+        }
     }
 }
