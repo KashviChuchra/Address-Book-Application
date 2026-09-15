@@ -53,8 +53,9 @@
                 Console.WriteLine("6- Search Person");
                 Console.WriteLine("7- View Contact By City/State");
                 Console.WriteLine("8- Get Count By City Or State");
+                Console.WriteLine("9- Sort By Name");
 
-                Console.WriteLine("0- Exit");
+            Console.WriteLine("0- Exit");
                 Console.WriteLine();
                 string choice = Console.ReadLine();
 
@@ -164,6 +165,10 @@
                 else if (choice == "8")
                 {
                     addressBook1.GetCountByCityOrState();
+                }
+                else if (choice == "9")
+                {
+                    addressBook1.SortByName();
                 }
                 else if (choice == "0")
                 {

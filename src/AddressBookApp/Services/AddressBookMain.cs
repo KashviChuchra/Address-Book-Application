@@ -47,5 +47,7 @@ namespace AddressBookApp.src.AddressBookApp.Services
                 Console.WriteLine(contact);
             }
         }
+
+        
     }
 }

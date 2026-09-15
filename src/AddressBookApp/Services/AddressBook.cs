@@ -193,5 +193,14 @@ namespace AddressBookApp.src.AddressBookApp.Services
 
         }
 
+        public void SortByName()
+        {
+            var matches = contacts.OrderBy(c => c.FirstName).ThenBy(c => c.LastName);
+            foreach(var contact in matches)
+            {
+                Console.WriteLine(contact.ToString());
+            }
+        }
+
     }
 }
